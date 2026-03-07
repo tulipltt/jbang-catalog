@@ -1,0 +1,9 @@
+{
+  "catalogs": {},
+  "aliases": {
+    "kwrk": {
+      "script-ref": "kwrk.kt"
+    }
+  },
+  "templates": {}
+}
