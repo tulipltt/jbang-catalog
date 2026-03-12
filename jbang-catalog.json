@@ -3,6 +3,9 @@
   "aliases": {
     "kwrk": {
       "script-ref": "kwrk.kt"
+    },
+    "tulip-cli": {
+      "script-ref": "TulipCli.java"
     }
   },
   "templates": {}
