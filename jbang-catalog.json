@@ -4,11 +4,11 @@
     "kwrk": {
       "script-ref": "kwrk.kt"
     },
-    "tulip-cli-2.3.0": {
+    "tulip-cli:2.3.0": {
       "script-ref": "apps/tulip-cli/2.3.0/TulipCli.java"
     },
     "tulip-cli": {
-      "script-ref": "tulip-cli-2.3.0@tulipltt"
+      "script-ref": "tulip-cli:2.3.0@tulipltt"
     },
     "tulip-cli-dev": {
       "script-ref": "TulipCli.java"
