@@ -12,7 +12,7 @@ import java.util.List;
 public class TulipCli {
 
     static String appName = "tulip-cli";
-    static String appVersion = io.github.tulipltt.tulip.api.TulipApi.VERSION;
+    static String appVersion = System.getProperty("jbang.app.version", io.github.tulipltt.tulip.api.TulipApi.VERSION);
 
     static void displayAppInfo() {
         System.err.println(
