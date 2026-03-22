@@ -11,7 +11,7 @@
       }
     },
     "tulip-cli": {
-      "script-ref": "tulip-cli[2.3.0]"
+      "script-ref": "tulip-cli[2.3.0]@tulipltt"
     },
     "tulip-cli[main]": {
       "script-ref": "TulipCli.java"
