@@ -18,7 +18,10 @@
     },
     // main branch version of tulip-cli, which may be ahead of the stable version
     "tulip-cli[main]": {
-      "script-ref": "TulipCli.java"
+      "script-ref": "TulipCli.java",
+      "properties": {
+        "jbang.app.version": "2.3.1-SNAPSHOT"
+      }
     }
   },
   "templates": {}
