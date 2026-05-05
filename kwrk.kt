@@ -266,7 +266,7 @@ class KwrkCli : CliktCommand() {
     private val p_rate by option("--rate").double().default(5.0)
     private val p_rate_step_change by option("--rateStepChange").double().default(0.0)
     private val p_rate_step_count by option("--rateStepCount").int().default(1)
-    private val p_conns by option("--conns").int().default(1)
+    private val p_conns by option("--users").int().default(1)
     private val p_tasks by option("--tasks").int().default(1)
     private val p_threads by option("--threads").int().default(0)
     private val p_warmup by option("--warmup").int().default(5)
@@ -316,7 +316,7 @@ class KwrkCli : CliktCommand() {
             println("    --rate ${p_rate}")
             println("    --rateStepChange ${p_rate_step_change}")
             println("    --rateStepCount ${p_rate_step_count}")
-            println("    --conns ${p_conns}")
+            println("    --users ${p_conns}")
             println("    --tasks ${p_tasks}")
             if (p_threads != 0) {
                 println("    --threads ${p_threads}")
