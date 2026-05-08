@@ -40,7 +40,7 @@
     // stable version of tulip-cli, which is currently 2.3.0,
     // but we want to be able to update it without breaking the alias
     "tulip-cli": {
-      "script-ref": "tulip-cli[2.3.1]@./jbang-catalog.json"
+      "script-ref": "tulip-cli[2.3.2]@./jbang-catalog.json"
     }
   },
   "templates": {}
