@@ -1,6 +1,6 @@
 // spotless:off
 //DEPS com.github.ajalt.clikt:clikt-jvm:5.1.0
-//DEPS io.github.tulipltt:tulip-runtime:2.3.1
+//DEPS io.github.tulipltt:tulip-runtime:2.3.2
 //JAVA 21+
 //KOTLIN 2.3.21
 //FILES kwrk_logback.xml
@@ -229,7 +229,12 @@ class KwrkHttpUser() : HttpUser() {
 
     // Action 1: GET ${url}
     override fun action1(): Boolean {
-        return httpGet(getUrlPath()).isSuccessful()
+        val query: String? = getUrlQuery()
+        if (query != null) {
+            return httpGetWithQueryParams(getUrlPath(), query).isSuccessful()
+        } else {
+            return httpGet(getUrlPath()).isSuccessful()
+        }
     }
 
     // Action 2: POST ${url}
@@ -261,7 +266,7 @@ class KwrkCli : CliktCommand() {
     private val p_rate by option("--rate").double().default(5.0)
     private val p_rate_step_change by option("--rateStepChange").double().default(0.0)
     private val p_rate_step_count by option("--rateStepCount").int().default(1)
-    private val p_conns by option("--conns").int().default(1)
+    private val p_conns by option("--users").int().default(1)
     private val p_tasks by option("--tasks").int().default(1)
     private val p_threads by option("--threads").int().default(0)
     private val p_warmup by option("--warmup").int().default(5)
@@ -311,7 +316,7 @@ class KwrkCli : CliktCommand() {
             println("    --rate ${p_rate}")
             println("    --rateStepChange ${p_rate_step_change}")
             println("    --rateStepCount ${p_rate_step_count}")
-            println("    --conns ${p_conns}")
+            println("    --users ${p_conns}")
             println("    --tasks ${p_tasks}")
             if (p_threads != 0) {
                 println("    --threads ${p_threads}")

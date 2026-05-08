@@ -29,7 +29,13 @@
       "script-ref": "apps/tulip-cli/2.3.1/TulipCli.java",
       "properties": {
         "jbang.app.version": "2.3.1"
-      }
+      },
+      // version 2.3.2 of tulip-cli
+      "tulip-cli[2.3.2]": {
+        "script-ref": "apps/tulip-cli/2.3.2/TulipCli.java",
+        "properties": {
+          "jbang.app.version": "2.3.2"
+        }
     },
     // stable version of tulip-cli, which is currently 2.3.0,
     // but we want to be able to update it without breaking the alias
