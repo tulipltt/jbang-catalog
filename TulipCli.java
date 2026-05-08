@@ -1,5 +1,5 @@
 // spotless:off
-//DEPS io.github.tulipltt:tulip-runtime:2.3.1
+//DEPS io.github.tulipltt:tulip-runtime:${jbang.app.version}
 // spotless:on
 
 import java.io.FileWriter;

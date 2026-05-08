@@ -2,45 +2,16 @@
   "catalogs": {},
   "aliases": {
     "kwrk": {
-      "script-ref": "kwrk.kt"
-    },
-    "tulip-cli[]": {
-      "script-ref": "apps/tulip-cli/${version}/TulipCli.java",
+      "script-ref": "kwrk.kt",
       "properties": {
-        "jbang.app.version": "${version}"
+        "jbang.app.version": "2.3.2"
       }
     },
-    // main branch version of tulip-cli, which may be ahead of the stable version
-    "tulip-cli[main]": {
+    "tulip-cli": {
       "script-ref": "TulipCli.java",
       "properties": {
-        "jbang.app.version": "2.3.1-SNAPSHOT"
+        "jbang.app.version": "2.3.2"
       }
-    },
-    // version 2.3.0 of tulip-cli
-    "tulip-cli[2.3.0]": {
-      "script-ref": "apps/tulip-cli/2.3.0/TulipCli.java",
-      "properties": {
-        "jbang.app.version": "2.3.0.1"
-      }
-    },
-    // version 2.3.1 of tulip-cli
-    "tulip-cli[2.3.1]": {
-      "script-ref": "apps/tulip-cli/2.3.1/TulipCli.java",
-      "properties": {
-        "jbang.app.version": "2.3.1"
-      },
-      // version 2.3.2 of tulip-cli
-      "tulip-cli[2.3.2]": {
-        "script-ref": "apps/tulip-cli/2.3.2/TulipCli.java",
-        "properties": {
-          "jbang.app.version": "2.3.2"
-        }
-    },
-    // stable version of tulip-cli, which is currently 2.3.0,
-    // but we want to be able to update it without breaking the alias
-    "tulip-cli": {
-      "script-ref": "tulip-cli[2.3.2]@./jbang-catalog.json"
     }
   },
   "templates": {}
