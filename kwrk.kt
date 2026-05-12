@@ -207,9 +207,9 @@ val indexHtml: String =
     """
         .trimIndent()
 
-fun writeToFile(path: String, content: String, append: Boolean) {
+fun writeToFile(odir: String, path: String, content: String, append: Boolean) {
     try {
-        FileWriter(path, append).use { fileWriter -> fileWriter.write(content) }
+        FileWriter(odir + "/" + path, append).use { fileWriter -> fileWriter.write(content) }
     } catch (e: IOException) {
         // exception handling ...
     }
@@ -261,6 +261,7 @@ class KwrkHttpUser() : HttpUser() {
 }
 
 class KwrkCli : CliktCommand() {
+    private val p_odir by option("--outputDir").default(".")
     private val p_debug by option("--debug").default("false")
     private val p_version by option("--version").default("HTTP_1_1")
     private val p_rate by option("--rate").double().default(5.0)
@@ -282,6 +283,9 @@ class KwrkCli : CliktCommand() {
     override fun run() {
         displayAppInfo()
         println("")
+
+        val folder: File = File(p_odir)
+        folder.mkdirs()
 
         var json = benchmarkConfig
 
@@ -340,12 +344,13 @@ class KwrkCli : CliktCommand() {
         println("")
 
         val configFilename = "kwrk_${p_rpt_suffix}_config.json"
-        writeToFile(configFilename, json, false)
+        writeToFile(p_odir, configFilename, json, false)
         val outputFilename = TulipApi.runTulip(configFilename)
         TulipApi.generateReport(outputFilename)
 
         val indexFilename = "kwrk_${p_rpt_suffix}_index.html"
         writeToFile(
+            p_odir,
             indexFilename,
             indexHtml
                 .replace("__REPORT_FILENAME__", "kwrk_${p_rpt_suffix}_report.html")
@@ -353,7 +358,7 @@ class KwrkCli : CliktCommand() {
             false,
         )
 
-        val old_lines: List<String> = File("kwrk_${p_rpt_suffix}_report.html").readLines()
+        val old_lines: List<String> = File(p_odir + "/" + "kwrk_${p_rpt_suffix}_report.html").readLines()
         val new_lines: MutableList<String> = mutableListOf()
         var i = 0
         for (line in old_lines) {
@@ -437,7 +442,7 @@ class KwrkCli : CliktCommand() {
         new_lines.add("</body>")
         new_lines.add("</html>")
 
-        val br: BufferedWriter = BufferedWriter(FileWriter("kwrk_${p_rpt_suffix}_report.html"))
+        val br: BufferedWriter = BufferedWriter(FileWriter(p_odir + "/" + "kwrk_${p_rpt_suffix}_report.html"))
         for (str in new_lines) {
             br.write(str + java.lang.System.lineSeparator())
         }
