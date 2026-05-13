@@ -45,6 +45,25 @@ fun getHyphenatedTime(): String {
     return now.format(formatter)
 }
 
+/**
+ * Fetches files matching the pattern: kwrk_hh-mm-ss_report.html
+ * @param directoryPath The local directory to search in.
+ * @return List of matching File objects.
+ */
+fun fetchKwrkReports(directoryPath: String = "."): List<File> {
+    val directory = File(directoryPath)
+
+    // Pattern breakdown:
+    // ^kwrk_         : Starts with "kwrk_"
+    // \d{2}-\d{2}-\d{2} : Exactly two digits for HH, MM, and SS
+    // _report\.html$ : Ends with "_report.html"
+    val reportRegex = Regex("""^kwrk_\d{2}-\d{2}-\d{2}_report\.html$""")
+
+    return directory.listFiles { file ->
+        file.isFile && reportRegex.matches(file.name)
+    }?.toList() ?: emptyList()
+}
+
 val benchmarkConfig: String =
     """
     {
@@ -185,16 +204,7 @@ val indexHtml: String =
     <body>
 
         <div class="container">
-            <nav class="sidebar" id="menu">
-                <h2>Benchmark Reports</h2>
-                <ul>
-                    <li><a href="__REPORT_FILENAME__" target="reportFrame" class="active">kwrk - __RPT_ALIAS__</a></li>
-                </ul>
-            </nav>
-
-            <main class="content-panel">
-                <iframe name="reportFrame" src="__REPORT_FILENAME__"></iframe>
-            </main>
+__NAV_TEXT__
         </div>
 
         <script>
@@ -353,13 +363,49 @@ class KwrkCli : CliktCommand() {
         val outputFilename = TulipApi.runTulip(configFilename)
         TulipApi.generateReport(outputFilename)
 
+        //        <nav class="sidebar" id="menu">
+        //            <h2>Benchmark Reports</h2>
+        //            <ul>
+        //                <li><a href="kwrk_15-44-57_report.html" target="reportFrame" class="active">kwrk - 15-44-57</a></li>
+        //            </ul>
+        //            <ul>
+        //                <li><a href="kwrk_15-48-33_report.html" target="reportFrame" class="active">kwrk - 15-48-33</a></li>
+        //            </ul>
+        //            <ul>
+        //                <li><a href="kwrk_16-05-58_report.html" target="reportFrame" class="active">kwrk - 16-05-58</a></li>
+        //            </ul>
+        //        </nav>
+        //
+        //        <main class="content-panel">
+        //            <iframe name="reportFrame" src="kwrk_16-05-58_report.html"></iframe>
+        //        </main>
+
+        var navString = "        <nav class=\"sidebar\" id=\"menu\">\n" +
+                "            <h2>Benchmark Reports</h2>\n"
+        navString += "            <ul>\n"
+        var firstFilename =""
+        for (filename: File in fetchKwrkReports()) {
+            var filenameString = filename.toString().substring(2)
+            val filenameString2 = filenameString //.substring(0, filenameString.length - 5)
+            if (firstFilename == "") {
+                firstFilename = filenameString
+                navString += "                <li><a href=\"${filenameString}\" target=\"reportFrame\" class=\"active\">${filenameString2}</a></li>\n"
+            } else {
+                navString += "                <li><a href=\"${filenameString}\" target=\"reportFrame\">${filenameString2}</a></li>\n"
+            }
+        }
+        navString += "            </ul>\n"
+        navString += "        </nav>\n\n"
+        navString += "        <main class=\"content-panel\">\n" +
+                "            <iframe name=\"reportFrame\" src=\"${firstFilename}\"></iframe>\n" +
+                "        </main>\n"
+
         val indexFilename = "kwrk_index.html"
         writeToFile(
             indexFilename,
             indexHtml
-                .replace("__REPORT_FILENAME__", "kwrk_${p_rpt_suffix}_report.html")
-                .replace("__RPT_ALIAS__", "${p_rpt_suffix}"),
-            false,
+                .replace("__NAV_TEXT__", navString),
+            false
         )
 
         val old_lines: List<String> = File("kwrk_${p_rpt_suffix}_report.html").readLines()
