@@ -24,6 +24,8 @@ import java.io.FileWriter
 import java.io.IOException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 const val appName: String = "kwrk"
 const val appVersion: String = "__JBANG_SNAPSHOT_ID__/__JBANG_SNAPSHOT_TIMESTAMP__"
@@ -34,6 +36,13 @@ private fun displayAppInfo() {
         version = "0/2026-02-10T17:32:19"
     }
     println(appName + "/" + version + "/" + TulipApi.VERSION)
+}
+
+fun getHyphenatedTime(): String {
+    val now = LocalTime.now()
+    // Use "HH-mm-ss" for 24-hour or "hh-mm-ss" for 12-hour
+    val formatter = DateTimeFormatter.ofPattern("HH-mm-ss")
+    return now.format(formatter)
 }
 
 val benchmarkConfig: String =
@@ -275,9 +284,9 @@ class KwrkCli : CliktCommand() {
     private val p_header by option("--header").default("User-Agent: kwrk")
     private val p_method by option("--method").default("GET")
     private val p_url by option("--url").default("http://jsonplaceholder.typicode.com/posts/1")
-    private val p_rpt_suffix by option("--name").default("test")
     private val p_json_body by
         option("--jsonBody").default("{\"title\": \"foo\", \"body\": \"bar\", \"userId\": 1}")
+    private val p_rpt_suffix: String = getHyphenatedTime()
 
     override fun run() {
         displayAppInfo()
@@ -344,7 +353,7 @@ class KwrkCli : CliktCommand() {
         val outputFilename = TulipApi.runTulip(configFilename)
         TulipApi.generateReport(outputFilename)
 
-        val indexFilename = "kwrk_${p_rpt_suffix}_index.html"
+        val indexFilename = "kwrk_index.html"
         writeToFile(
             indexFilename,
             indexHtml
