@@ -497,6 +497,7 @@ class KwrkCli : CliktCommand() {
             br.write(str + java.lang.System.lineSeparator())
         }
         br.close()
+        println("Main \nreport: kwrk_index.html")
     }
 }
 
