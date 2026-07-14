@@ -63,6 +63,7 @@ public class TulipCli {
                         "httpVersion": "__HTTP_VERSION__",
                         "connectTimeoutMillis": 5000,
                         "readTimeoutMillis": 10000,
+                        "shareConnections": true,
                         "debug": true
                     },
                     "user_actions": {
