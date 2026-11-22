@@ -390,7 +390,7 @@ public class TulipCli {
             del run*.cmd
             del run*.sh
             del benchmark_*.*
-            del .sdkmanrc
+            del mise.toml
             rd/q/s .asciidoctor
             rd/q/s benchmark_report
             del wfd0.svg
@@ -405,37 +405,16 @@ public class TulipCli {
             )
             """;
 
-    static String sdkmanConfig =
+    static String miseTomlConfig =
             """
-            # Enable auto-env through the sdkman_auto_env config
-            # Add key=value pairs of SDKs to use below
-
-            # Java
-            java=25.0.1-tem
-
-            # Groovy
-            groovy=5.0.3
-
-            # Gradle
-            gradle=9.3.0
-
-            # JBang
-            jbang=0.135.1
-
-            # Kotlin
-            kotlin=2.3.20
-
-            # Scala
-            scalacli=1.11.0
-
-            # MCS
-            mcs=0.9.3
-
-            # Maven
-            maven=3.9.12
-
-            # VisualVM
-            visualvm=2.2
+            [tools]
+            java = "temurin-21"
+            gradle = "latest"
+            maven = "latest"
+            scala-cli = "latest"
+            groovy = "latest"
+            kotlin = "latest"
+            jbang = "latest"
             """;
 
     static String logbackXml =
@@ -538,7 +517,7 @@ public class TulipCli {
                         .replace("__TULIP_JAVA_OPTIONS__", TULIP_JAVA_OPTIONS),
                 false);
 
-        writeToFile(".sdkmanrc", sdkmanConfig, false);
+        writeToFile("mise.toml", miseTomlConfig, false);
         writeToFile("logback.xml", logbackXml, false);
         writeToFile("json_report.py", jsonReportPy, false);
         writeToFile("view_report.sh", viewBenchReportSh, false);
@@ -697,7 +676,7 @@ public class TulipCli {
                         .replace("__TULIP_JAVA_OPTIONS__", TULIP_JAVA_OPTIONS),
                 false);
 
-        writeToFile(".sdkmanrc", sdkmanConfig, false);
+        writeToFile("mise.toml", miseTomlConfig, false);
         writeToFile("logback.xml", logbackXml, false);
         writeToFile("json_report.py", jsonReportPy, false);
         writeToFile("view_report.sh", viewBenchReportSh, false);
@@ -879,7 +858,7 @@ public class TulipCli {
                         .replace("__TULIP_JAVA_OPTIONS__", TULIP_JAVA_OPTIONS),
                 false);
 
-        writeToFile(".sdkmanrc", sdkmanConfig, false);
+        writeToFile("mise.toml", miseTomlConfig, false);
         writeToFile("logback.xml", logbackXml, false);
         writeToFile("json_report.py", jsonReportPy, false);
         writeToFile("view_report.sh", viewBenchReportSh, false);
@@ -1024,7 +1003,7 @@ public class TulipCli {
                         .replace("__TULIP_JAVA_OPTIONS__", TULIP_JAVA_OPTIONS),
                 false);
 
-        writeToFile(".sdkmanrc", sdkmanConfig, false);
+        writeToFile("mise.toml", miseTomlConfig, false);
         writeToFile("logback.xml", logbackXml, false);
         writeToFile("json_report.py", jsonReportPy, false);
         writeToFile("view_report.sh", viewBenchReportSh, false);
@@ -1179,7 +1158,7 @@ public class TulipCli {
                         .replace("__TULIP_JAVA_OPTIONS__", TULIP_JAVA_OPTIONS),
                 false);
 
-        writeToFile(".sdkmanrc", sdkmanConfig, false);
+        writeToFile("mise.toml", miseTomlConfig, false);
         writeToFile("logback.xml", logbackXml, false);
         writeToFile("json_report.py", jsonReportPy, false);
         writeToFile("view_report.sh", viewBenchReportSh, false);
