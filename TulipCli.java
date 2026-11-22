@@ -554,7 +554,7 @@ public class TulipCli {
             //DEPS io.github.tulipltt:tulip-runtime:__TULIP_VERSION__
             //SOURCES KotlinHttpUser.kt
             //JAVA __TULIP_JAVA_VERSION__
-            //KOTLIN 2.3.20
+            //KOTLIN 2.4.21
             //FILES ../../benchmark_config.json
             //FILES ../../logback.xml
             //RUNTIME_OPTIONS -XX:+IgnoreUnrecognizedVMOptions
@@ -713,7 +713,7 @@ public class TulipCli {
             //DEPS io.github.tulipltt:tulip-runtime:__TULIP_VERSION__
             //SOURCES GroovyHttpUser.groovy
             //JAVA __TULIP_JAVA_VERSION__
-            //GROOVY 5.0.3
+            //GROOVY 6.0.0
             //FILES ../../benchmark_config.json
             //FILES ../../logback.xml
             //RUNTIME_OPTIONS -XX:+IgnoreUnrecognizedVMOptions
@@ -1038,7 +1038,7 @@ public class TulipCli {
             """
             ///usr/bin/env jbang "$0" "$@" ; exit $?
 
-            //DEPS org.python:jython-standalone:2.7.5b1
+            //DEPS org.python:jython-standalone:2.7.5rc1
             //DEPS io.github.tulipltt:tulip-runtime:__TULIP_VERSION__
             //JAVA __TULIP_JAVA_VERSION__
             //RUNTIME_OPTIONS __TULIP_JAVA_OPTIONS__
@@ -1060,7 +1060,7 @@ public class TulipCli {
             from __future__ import print_function
 
             # /// jbang
-            # requires-jython = "2.7.5b1"
+            # requires-jython = "2.7.5rc1"
             # requires-java = "__TULIP_JAVA_VERSION__"
             # dependencies = [
             #   "io.github.tulipltt:tulip-runtime:__TULIP_VERSION__"
