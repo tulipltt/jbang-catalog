@@ -4,13 +4,13 @@
     "kwrk": {
       "script-ref": "kwrk.kt",
       "properties": {
-        "jbang.app.version": "2.3.5"
+        "jbang.app.version": "2.3.7"
       }
     },
     "tulip-cli": {
       "script-ref": "TulipCli.java",
       "properties": {
-        "jbang.app.version": "2.3.5"
+        "jbang.app.version": "2.3.7"
       }
     }
   },
