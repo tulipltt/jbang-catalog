@@ -1,8 +1,8 @@
 // spotless:off
-//DEPS com.github.ajalt.clikt:clikt-jvm:5.1.0
+//DEPS com.github.ajalt.clikt:clikt-jvm:5.2.1
 //DEPS io.github.tulipltt:tulip-runtime:${jbang.app.version}
 //JAVA 21+
-//KOTLIN 2.3.21
+//KOTLIN 2.4.21
 //FILES kwrk_logback.xml
 //RUNTIME_OPTIONS -XX:+IgnoreUnrecognizedVMOptions
 //RUNTIME_OPTIONS --enable-native-access=ALL-UNNAMED
